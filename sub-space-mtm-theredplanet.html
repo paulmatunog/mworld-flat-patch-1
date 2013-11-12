@@ -1,0 +1,153 @@
+<!-- i-C-a -->
+<div data-role="page" id="theredplanet">
+  <script src="js/slidebarmtm.js"></script>
+  
+  <div class="menuhousing"></div>
+  <div class="homebtnholder"><div class="homebtnmtm"></div></div>
+  <div class="mpbtnholder"><div class="mpbtnmtm"></div></div>
+  <div class="cpbtnholder"><div class="cpbtnmtm"></div></div>
+  <div class="infobtnholder"><div class="infobtnmtm"></div></div>
+  <div class="credsbtnholder"><div class="credsbtnmtm"></div></div>
+  <div class="menubtnholder"><div class="menubtnmtm"></div></div>
+  
+  <div class="navtitleholderbh" style="padding-top:14px;"><h1>The Red Planet</h1></div>
+  
+    <div data-role="content" class="kidzcontent">
+      <div class="navbh-content">
+        <p>Let's explore Mars.</p>
+        <p>How do we find it?</p>
+        <p>What does this red planet really look like?</p>
+        <p>Why does it have a special place in our imagination?</p>
+      </div>
+        
+      <div class="navbtn1">
+        <p>
+          <a href="sub-space-mtm-theredplanet-whatismars.html" data-transition="slide">
+            <img src="css/images/missiontomars/theredplanet/whatismarsbtn.png">
+          </a>
+        </p>
+      </div>
+      <div class="navbtn2">
+        <p>
+          <a href="sub-space-mtm-theredplanet-imaginingmars.html" data-transition="slide" >
+            <img src="css/images/missiontomars/theredplanet/imaginingmarsbtn.png">
+          </a>
+        </p>
+      </div>
+      <div class="navbtn3">
+        <p>
+          <a href="sub-space-mtm-theredplanet-lookingatmars.html" data-transition="slide" >
+            <img src="css/images/missiontomars/theredplanet/lookingatmarsbtn.png">
+          </a>
+        </p>
+      </div>
+      <div class="navbtn4">
+        <p>
+          <a href="sub-space-bh-lifeabh.html" data-transition="slide" >
+            <img src="css/images/missiontomars/theredplanet/whygotomarsbtn.png">
+          </a>
+        </p>
+      </div>
+        
+      <div class="botlogoholder"><a href="home.html" class="homelinkmtm"><img src="css/images/5-8/bottomhomebh.png"></a></div>
+    </div> <!-- end content -->  
+    
+
+    <!-- Start Audion Controls -->
+    <div class="micbtnholder"><div class="micbtnmtm" id="playstoptrp"></div></div>
+    <div class="bmtm"><div class="rwmtm" id="trpaudiobbtn"></div></div>
+    <div class="plmtm"><div class="plpsmtm" id="trpaudioplbtn"></div></div>
+    <div class="fmtm"><div class="fwmtm" id="trpaudiofbtn"></div></div>
+    <div id="actualaudio-trp" style="visibility:hidden;"></div>
+    <!-- End Audio Controls -->
+
+  <script>
+    sound = new Audio(); // 'sound' is now an audio object
+    var playing;
+      (function() {
+      playing = false;
+      if(sound.canPlayType('audio/mpeg')) {
+        $('#actualaudio-trp').html('<audio id="trpnar" controls preload onpause="pausedaudio()" onplay="pausebg()"><source src="audio/trpnar.mp3" type="audio/mpeg"></audio>');
+      }
+          
+    })();
+
+    $("#theredplanet").swipe( { swipeRight:goBack, allowPageScroll:"auto"} );
+    
+    $('.homelinkmtm').on('tap', function() { 
+      mainaudiobg.play(); 
+      bgsoundmtm.pause(); 
+      bgsoundmtm.currentTime = 0; 
+      // trpnar.pause();
+      // trpnar.currentTime = 0;  
+    });
+    
+    function goBack() {
+      $.mobile.changePage("sub-space-mtm.html", {transition: "slide", reverse: true });
+    }
+    
+    function pausedaudio() {
+      bgsoundmtm.play();
+    }
+    
+    function pausebg() {
+      bgsoundmtm.pause();
+    }
+    
+/* ******************** */
+    
+   $("#playstoptrp").on('tap', function() {
+      if(!playing) {
+        trpnar.play();
+
+        $('.micbtnmtm').css('background-position', '-81px 0');
+        setTimeout(function() {
+          $('.micbtnmtm').css('background-position', '-81px -81px');
+        }, 300)
+
+        playing = true;
+      } else {
+        trpnar.pause(); 
+        trpnar.currentTime = 0;
+        
+        $('.micbtnmtm').css('background-position', '0 0');
+        setTimeout(function() {
+          $('.micbtnmtm').css('background-position', '0 -81px');
+        }, 300)        
+
+        playing = false;
+      }
+    });
+
+    $("#trpaudioplbtn").on('tap', function() {
+      if(!playing) {
+        trpnar.play();
+
+        $('.micbtnmtm').css('background-position', '-81px -81px');
+
+
+        playing = true;
+      } else {
+        trpnar.pause();
+        
+        $('.micbtnmtm').css('background-position', '0 -81px');
+        
+        playing = false;
+      }
+    });
+
+    $("#trpaudiofbtn").on('tap', function() {
+      var ctime = trpnar.currentTime;
+      trpnar.currentTime = ctime + 10;
+    });
+
+    $("#trpaudiobbtn").on('tap', function() {
+      var ctime = trpnar.currentTime;
+      trpnar.currentTime = ctime - 10;
+    });
+
+  </script>
+  
+  
+
+</div>
